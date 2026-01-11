@@ -14,6 +14,7 @@ const app = express();
 
 const allowedOrigins = [
     'https://localhost:3000',
+    'https://authdash-1ox4.onrender.com',
     'https://authdash-tau.vercel.app'
 ]
 
