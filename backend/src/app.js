@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-    'https://localhost:3000',
+    'http://localhost:3000',
     'https://authdash-1ox4.onrender.com',
     'https://authdash-tau.vercel.app'
 ]
@@ -28,8 +28,8 @@ const corsOptions = {
         }
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedOrigins: ['Content-Type', 'Authorization'],
-    credential: true,
+    allowedHeader: ['Content-Type', 'Authorization'],
+    credentials: true,
 }
 
 // Connect to database
