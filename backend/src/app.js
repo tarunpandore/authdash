@@ -38,7 +38,7 @@ connectDB();
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.options('*', cors(corsOptions))
+app.options(/(.*)/, cors(corsOptions))
 
 // Auth routes
 app.use('/api/auth', authRoutes);
