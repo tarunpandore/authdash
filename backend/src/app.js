@@ -12,12 +12,33 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [
+    'https://localhost:3000',
+    'https://authdash-tau.vercel.app'
+]
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // allow requests with no origin like mobile apps or curl
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedOrigins: ['Content-Type', 'Authorization'],
+    credential: true,
+}
+
 // Connect to database
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
+
+app.options('*', cors(corsOptions))
 
 // Auth routes
 app.use('/api/auth', authRoutes);
