@@ -62,3 +62,13 @@ export const loginUser = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 }
+
+// Get current user
+export const getCurrentUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select('-password');
+        res.json({ user });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
