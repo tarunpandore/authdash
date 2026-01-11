@@ -4,7 +4,9 @@ import User from '../models/User.js';
 export const authMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith('Bearer')) { return res.status(401).json({ message: 'Authentication required' }); }
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ message: 'Authentication required' });
+    }
 
     const token = authHeader.split(' ')[1]
 
