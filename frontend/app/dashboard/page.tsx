@@ -114,7 +114,7 @@ const Dashboard = () => {
         <div className="flex-1 overflow-auto px-6 py-6">
           <StatsGrid
             total={tasks.length}
-            completed={tasks.filter(t => t.complete).length}
+            complete={tasks.filter(t => t.complete).length}
             pending={tasks.filter(t => !t.complete).length}
           />
 
