@@ -8,7 +8,7 @@ The project is built with a **frontend-first approach**, focusing on clean UI/UX
 This project demonstrates real-world patterns used in modern web applications, including JWT-based authentication, modular frontend architecture, and RESTful API design.
 
 ## Demo
-Link: (Currently not deployed yet.)
+Link: https://authdash-tau.vercel.app/
 
 ---
 
@@ -60,59 +60,63 @@ Link: (Currently not deployed yet.)
 
 ## 📁 Project Structure (Scalable Design)
     project-root/
-    ├── frontend/                      # Next.js + TypeScript application
+    ├── frontend/                      # Next.js 14 + TypeScript application
     │   ├── app/                       # App Router (routes & layouts)
-    │   │   ├── layout.tsx
-    │   │   ├── page.tsx
-    │   │   ├── login/
-    │   │   │   └── page.tsx
-    │   │   ├── register/
-    │   │   │   └── page.tsx
+    │   │   ├── layout.tsx             # Root layout
+    │   │   ├── page.tsx               # Home page
+    │   │   ├── globals.css            # Global styles
+    │   │   ├── auth/
+    │   │   │   ├── login/
+    │   │   │   │   └── page.tsx       # Login page
+    │   │   │   └── register/
+    │   │   │       └── page.tsx       # Registration page
     │   │   └── dashboard/
-    │   │       └── page.tsx
+    │   │       └── page.tsx           # Protected dashboard with task management
     │   │
     │   ├── components/                # Reusable UI components
-    │   │   ├── Navbar.tsx
-    │   │   ├── ProtectedRoute.tsx
-    │   │   └── FormInput.tsx
+    │   │   ├── Navbar.tsx             # Navigation component
+    │   │   └── Layout/
+    │   │       ├── Sidebar.tsx        # Sidebar navigation
+    │   │       └── StatsGrid.tsx      # Stats display component
     │   │
-    │   ├── hooks/                     # Custom React hooks
-    │   │   └── useAuth.ts
+    │   ├── lib/                       # API & utility logic
+    │   │   ├── api.ts                 # Axios API client with auth token management
+    │   │   └── taskService.ts         # Task API service
     │   │
-    │   ├── services/                  # API & data-fetching logic
-    │   │   ├── auth.service.ts
-    │   │   └── task.service.ts
-    │   │
-    │   ├── types/                     # Type definitions
-    │   │   ├── user.d.ts
-    │   │   └── task.d.ts
-    │   │
-    │   ├── utils/                     # Helper functions
-    │   │   └── auth.ts
-    │   │
-    │   ├── styles/                    # Global styles
-    │   │   └── globals.css
-    │   │
-    │   ├── public/                    # Static assets
-    │   │
-    │   ├── next-env.d.ts               # Next.js TypeScript environment types
+    │   ├── next-env.d.ts              # Next.js TypeScript environment types
     │   ├── tsconfig.json
-    |   ├── .env.local
-    │   ├── next.config.js
-    │   └── package.json
+    │   ├── next.config.ts
+    │   ├── postcss.config.mjs
+    │   ├── eslint.config.mjs
+    │   ├── package.json
+    │   └── README.md
     │
-    ├── backend/                        # Node.js + Express API
+    ├── backend/                       # Node.js + Express API
     │   ├── src/
-    │   │   ├── controllers/           # Request handlers
-    │   │   ├── routes/                # API routes
-    │   │   ├── models/                # Mongoose schemas
-    │   │   ├── middleware/            # Auth & error middleware
-    │   │   ├── config/                # Database & env config
+    │   │   ├── controllers/
+    │   │   │   ├── authController.js  # Login, register, user profile handlers
+    │   │   │   └── taskController.js  # Task CRUD handlers
+    │   │   │
+    │   │   ├── routes/
+    │   │   │   ├── authRoutes.js      # /auth endpoints
+    │   │   │   └── taskRoutes.js      # /tasks endpoints
+    │   │   │
+    │   │   ├── models/
+    │   │   │   ├── User.js            # User schema & model
+    │   │   │   └── Task.js            # Task schema & model
+    │   │   │
+    │   │   ├── middleware/
+    │   │   │   └── authMiddleware.js  # JWT verification middleware
+    │   │   │
+    │   │   ├── config/
+    │   │   │   └── db.js              # MongoDB connection setup
+    │   │   │
     │   │   ├── utils/                 # Helper utilities
-    │   │   ├── app.js
-    │   │   └── server.js
+    │   │   │
+    │   │   ├── app.js                 # Express app initialization
+    │   │   └── server.js              # Server entry point
     │   │
-    │   ├── .env
+    │   ├── .env                       # Environment variables
     │   └── package.json
     │
     └── README.md
@@ -164,11 +168,15 @@ npm run dev
 
 ### 4. Environment Variables
 
-Create a .env file in backend directories and configure:
-```bash
+Create a .env file in backend directory, .env.local in frontend directory and configure:
 # Backend
+```bash
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 JWT_EXPIRES_IN=1d
+```
+# Frontend
+```bash
+NEXT_PUBLIC_API_URL=your_backend_url
 ```
