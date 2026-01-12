@@ -5,7 +5,7 @@ export type Task = {
     _id: string
     title: string
     description: string
-    completed: boolean
+    complete: boolean
 }
 
 // API call to get all tasks
@@ -21,7 +21,7 @@ export async function createTask(data: { title: string, description: string }): 
 }
 
 // API call to update a task
-export async function updateTask(id: string, data: Partial<{ title: string, description: string, completed: boolean }>): Promise<Task> {
+export async function updateTask(id: string, data: Partial<{ title: string, description: string, complete: boolean }>): Promise<Task> {
     const res = await api.put(`/tasks/${id}`, data)
     return res.data
 }

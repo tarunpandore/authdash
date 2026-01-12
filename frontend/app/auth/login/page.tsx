@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { api, setAuthToken } from '@/lib/api'
 
-const LoginPage = () => {
+const LoginContent = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const emailParam = searchParams.get('email') || ''
@@ -86,6 +86,14 @@ const LoginPage = () => {
         </form>
       </div>
     </div>
+  )
+}
+
+const LoginPage = () => {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center bg-black text-white">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   )
 }
 

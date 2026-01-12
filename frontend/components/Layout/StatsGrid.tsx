@@ -2,11 +2,11 @@ const StatsGrid = ({ total, complete, pending }: { total: number, complete: numb
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <StatCard label="Total Tasks" value={total} />
-            <StatCard label="Completed" value={completed} />
+            <StatCard label="Completed" value={complete} />
             <StatCard label="Pending" value={pending} />
             <StatCard
                 label="Completion Rate"
-                value={`${Math.round((completed / total) * 100 || 0)}%`}
+                value={`${Math.round((complete / total) * 100 || 0)}%`}
             />
         </div>
     )

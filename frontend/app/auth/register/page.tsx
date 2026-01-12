@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { api, setAuthToken } from '@/lib/api'
 
-const RegisterPage = () => {
+const RegisterContent = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const emailParam = searchParams.get('email') || ''
@@ -96,6 +96,14 @@ const RegisterPage = () => {
         </form>
       </div>
     </div>
+  )
+}
+
+const RegisterPage = () => {
+  return (
+    <Suspense fallback={<div className="flex min-h-screen items-center justify-center bg-black text-white">Loading...</div>}>
+      <RegisterContent />
+    </Suspense>
   )
 }
 
