@@ -3,7 +3,11 @@ import Task from '../models/Task.js';
 // GET all tasks for the logged in user
 export async function getTasks(req, res) {
     try {
-        const tasks = (await Task.find({ owner: req.user._id })).toSorted({ createdAt: -1 });
+        const tasks = await Task.find({ owner: req.user._id })
+
+        // sort by newest first
+        tasks.sort((a, b) => b.createdAt - a.createdAt)
+        
         res.json(tasks)
     } catch (error) { res.status(500).json({ message: error.message }); }
 }
