@@ -36,6 +36,18 @@ export const registerUser = async (req, res) => {
     }
 };
 
+// Check if user exists by email
+export const checkEmailExists = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        res.json({ exists: !!user });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
 // Login an existing user
 export const loginUser = async (req, res) => {
     const { email, password } = req.body;
